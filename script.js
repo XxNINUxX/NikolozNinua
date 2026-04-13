@@ -41,7 +41,7 @@
     var navTrack = btn.closest(".nav-track") || btn.parentElement;
     var trackRect = navTrack.getBoundingClientRect();
     var btnRect = btn.getBoundingClientRect();
-    indicator.style.left  = (btn.offsetLeft) + "px";
+    indicator.style.left  = btn.offsetLeft + "px";
     indicator.style.width = btn.offsetWidth + "px";
   }
 
@@ -218,28 +218,26 @@
     }
   }
 
-  /* HEAD-request to check if asset exists without loading it */
-  var audioCheckXhr = new XMLHttpRequest();
-  audioCheckXhr.open("HEAD", AUDIO_SRC, true);
-  audioCheckXhr.onload = function () {
-    if (audioCheckXhr.status >= 200 && audioCheckXhr.status < 400) {
-      audioEl.src = AUDIO_SRC;
-      audioReady = true;
-      loadSavedPrefs();
-      if (audioControls) audioControls.hidden = false;
-      /* If user previously wanted music, attempt resume after first gesture */
-      if (wantPlay) {
-        document.addEventListener("click", function onFirstClick() {
-          document.removeEventListener("click", onFirstClick);
-          userGestured = true;
-          tryPlay();
-        }, { once: true });
+  /* Fetch HEAD to check if asset exists without downloading it */
+  fetch(AUDIO_SRC, { method: "HEAD" })
+    .then(function (res) {
+      if (res.ok) {
+        audioEl.src = AUDIO_SRC;
+        audioReady = true;
+        loadSavedPrefs();
+        if (audioControls) audioControls.hidden = false;
+        /* If user previously wanted music, attempt resume after first gesture */
+        if (wantPlay) {
+          document.addEventListener("click", function onFirstClick() {
+            document.removeEventListener("click", onFirstClick);
+            userGestured = true;
+            tryPlay();
+          }, { once: true });
+        }
       }
-    }
-    /* else: file not found → leave audio UI hidden */
-  };
-  audioCheckXhr.onerror = function () { /* network error → leave audio UI hidden */ };
-  audioCheckXhr.send();
+      /* else: file not found → leave audio UI hidden */
+    })
+    .catch(function () { /* network error → leave audio UI hidden */ });
 
   /* Play/Pause button */
   if (playBtn) {
