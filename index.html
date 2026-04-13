@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nikoloz Ninua — 8‑Bit Portfolio</title>
+
+  <!-- Press Start 2P pixel font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== PARALLAX WORLD ===== -->
+  <div class="world" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="hills"></div>
+    <div class="ground"></div>
+    <!-- Decorative pipes -->
+    <div class="pipe pipe-1"></div>
+    <div class="pipe pipe-2"></div>
+    <!-- Coins -->
+    <div class="coin coin-1">?</div>
+    <div class="coin coin-2">?</div>
+  </div>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div id="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ===== MAIN SCREEN ===== -->
+  <div id="screen">
+
+    <!-- HEADER / HERO -->
+    <header class="site-header" role="banner">
+      <div class="hero">
+        <!-- Pixel avatar -->
+        <div class="avatar-wrap" aria-label="Pixel avatar of Nikoloz Ninua">
+          <img
+            src="assets/pixel-avatar.svg"
+            alt="Pixel avatar of Nikoloz Ninua"
+            class="pixel-avatar"
+            width="96" height="96"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+          />
+          <!-- Inline SVG fallback shown only if the asset fails to load -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="96" height="96"
+               class="pixel-avatar pixel-avatar--fallback" style="display:none"
+               shape-rendering="crispEdges" aria-hidden="true">
+            <rect x="2" y="2" width="12" height="2" fill="#e52222"/>
+            <rect x="3" y="0" width="10" height="2" fill="#e52222"/>
+            <rect x="3" y="4" width="10" height="5" fill="#f5c07a"/>
+            <rect x="5" y="5" width="2" height="2" fill="#3b1a08"/>
+            <rect x="9" y="5" width="2" height="2" fill="#3b1a08"/>
+            <rect x="4" y="7" width="8" height="1" fill="#3b1a08"/>
+            <rect x="5" y="8" width="6" height="1" fill="#3b1a08"/>
+            <rect x="3" y="9" width="10" height="5" fill="#3b6bc4"/>
+            <rect x="5" y="10" width="1" height="1" fill="#f5c07a"/>
+            <rect x="10" y="10" width="1" height="1" fill="#f5c07a"/>
+            <rect x="2" y="9" width="1" height="5" fill="#e52222"/>
+            <rect x="13" y="9" width="1" height="5" fill="#e52222"/>
+            <rect x="3" y="14" width="4" height="2" fill="#7b3a0c"/>
+            <rect x="9" y="14" width="4" height="2" fill="#7b3a0c"/>
+            <rect x="7" y="9" width="2" height="1" fill="#ffd700"/>
+          </svg>
+        </div>
+
+        <div class="hero-text">
+          <h1 class="hero-name">NIKOLOZ<br/>NINUA</h1>
+          <p class="hero-role">Junior Game Designer &amp; Game Tester</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="Nikoloz_Ninua_CV.html" target="_blank" rel="noopener">
+              ▶ Download CV
+            </a>
+            <button class="btn btn-secondary" id="toggle-scanlines">
+              ◈ Scanlines
+            </button>
+          </div>
+        </div>
+
+        <!-- Audio controls (hidden until chiptune-loop.mp3 is detected) -->
+        <div class="audio-controls" id="audio-controls" hidden aria-label="Background music controls">
+          <button class="btn btn-icon" id="audio-play-pause" aria-label="Play background music" aria-pressed="false">
+            ♪
+          </button>
+          <label class="sr-only" for="audio-volume">Volume</label>
+          <input type="range" id="audio-volume" min="0" max="1" step="0.05" value="0.4" class="volume-slider" aria-label="Volume" />
+        </div>
+      </div>
+
+      <!-- NAV -->
+      <nav class="site-nav" role="navigation" aria-label="Portfolio sections">
+        <div class="nav-track" role="tablist">
+          <button class="nav-btn" role="tab" data-target="profile"
+                  aria-controls="profile" aria-selected="true" aria-current="true"
+                  tabindex="0">PROFILE</button>
+          <button class="nav-btn" role="tab" data-target="skills"
+                  aria-controls="skills" aria-selected="false"
+                  tabindex="-1">SKILLS</button>
+          <button class="nav-btn" role="tab" data-target="projects"
+                  aria-controls="projects" aria-selected="false"
+                  tabindex="-1">PROJECTS</button>
+          <button class="nav-btn" role="tab" data-target="experience"
+                  aria-controls="experience" aria-selected="false"
+                  tabindex="-1">XP</button>
+          <button class="nav-btn" role="tab" data-target="contact"
+                  aria-controls="contact" aria-selected="false"
+                  tabindex="-1">CONTACT</button>
+        </div>
+        <!-- Animated underline indicator -->
+        <div class="nav-indicator" id="nav-indicator" aria-hidden="true"></div>
+      </nav>
+    </header>
+
+    <!-- ===== STAGE / CONTENT PANELS ===== -->
+    <main class="stage" id="stage">
+
+      <!-- PROFILE -->
+      <section id="profile" class="panel" role="tabpanel" aria-labelledby="nav-profile" tabindex="-1">
+        <h2 class="panel-title">◀ PROFILE ▶</h2>
+
+        <p class="panel-intro">
+          Aspiring Junior Game Designer &amp; Game Tester with hands-on experience in
+          playtesting, mechanic iteration, and bug reporting on indie titles. Comfortable
+          with iterative workflows and using AI/automation to speed iteration and reporting.
+        </p>
+
+        <div class="card-row">
+          <div class="card">
+            <h3>Strengths</h3>
+            <ul>
+              <li>Test → feedback → refine → retest workflow</li>
+              <li>Structured QA: repro steps, severity, regression verification</li>
+              <li>AI + automation for test generation &amp; reporting</li>
+              <li>Clear communicator; team‑oriented</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Education</h3>
+            <ul>
+              <li>Ilia State University — Computer Science (2019–2023)</li>
+              <li>Futuregames — Game Design &amp; QA (2025–present)</li>
+              <li>CES — 2021</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="panel" role="tabpanel" aria-labelledby="nav-skills" tabindex="-1" hidden>
+        <h2 class="panel-title">◀ SKILLS ▶</h2>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🎮</span>
+            <strong>Game Design</strong>
+            <span>Mechanics iteration, difficulty curves, progression</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🐛</span>
+            <strong>Testing &amp; QA</strong>
+            <span>Playtesting, functional testing, bug reporting</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🤖</span>
+            <strong>AI &amp; Automation</strong>
+            <span>Prompt-driven test ideas, templates, checklists</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">💻</span>
+            <strong>Programming</strong>
+            <span>C++, C#, Java</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🛠️</span>
+            <strong>Engines &amp; Tools</strong>
+            <span>Unity, Unreal, FMOD, Photoshop</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🎵</span>
+            <strong>Audio / Live Ops</strong>
+            <span>Ableton Live, live sound setup</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="panel" role="tabpanel" aria-labelledby="nav-projects" tabindex="-1" hidden>
+        <h2 class="panel-title">◀ PROJECTS ▶</h2>
+
+        <article class="project-card">
+          <div class="project-num" aria-hidden="true">1-1</div>
+          <div class="project-body">
+            <h3><a href="https://futuregames.itch.io/nanaintothebanana" target="_blank" rel="noopener">
+              Nana Into the Banana
+            </a></h3>
+            <p>FutureGames — Game Designer / Tester. Playtested mechanics and difficulty;
+               reported and verified fixes across iterations.</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-num" aria-hidden="true">1-2</div>
+          <div class="project-body">
+            <h3><a href="https://futuregames.itch.io/to-bee-or-not-to-bee" target="_blank" rel="noopener">
+              To Bee or Not To Bee
+            </a></h3>
+            <p>FutureGames — Game Designer / Tester. Supported iterative design,
+               tuning suggestions, and QA rounds.</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-num" aria-hidden="true">1-3</div>
+          <div class="project-body">
+            <h3>QA Placements (FutureGames)</h3>
+            <p>Tested games for 4 external partner studios. Executed structured test
+               sessions and regression verification.</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="panel" role="tabpanel" aria-labelledby="nav-experience" tabindex="-1" hidden>
+        <h2 class="panel-title">◀ EXPERIENCE ▶</h2>
+        <div class="xp-list">
+          <div class="xp-item">
+            <div class="xp-badge" aria-hidden="true">⭐</div>
+            <div class="xp-body">
+              <h3>Stage Sound Engineer (Freelance) — Tbilisi</h3>
+              <p>Set up and operated live sound systems; troubleshot under time pressure.</p>
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-badge" aria-hidden="true">⭐</div>
+            <div class="xp-body">
+              <h3>Professional Bass Player — Tbilisi (2021–2025)</h3>
+              <p>Performed regularly; collaborated on arrangements and live flow.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="panel" role="tabpanel" aria-labelledby="nav-contact" tabindex="-1" hidden>
+        <h2 class="panel-title">◀ CONTACT ▶</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="contact-label">📍 Location</span>
+            <span class="contact-value">Warsaw, Remote</span>
+          </div>
+          <div class="contact-card">
+            <span class="contact-label">✉️ Email</span>
+            <button id="copy-email" class="chip" aria-label="Copy email address to clipboard">
+              nikoloz.ninua.26@gmail.com
+            </button>
+          </div>
+          <div class="contact-card">
+            <span class="contact-label">📞 Phone</span>
+            <span class="contact-value">+48 798 437 890</span>
+          </div>
+          <div class="contact-card">
+            <span class="contact-label">🔗 LinkedIn</span>
+            <a class="contact-value"
+               href="https://www.linkedin.com/in/nikoloz-ninua-a8406b2bb"
+               target="_blank" rel="noopener">
+              linkedin.com/in/nikoloz-ninua
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="Nikoloz_Ninua_CV.html" target="_blank" rel="noopener">
+            ▶ Download CV
+          </a>
+          <a class="btn btn-secondary" href="mailto:nikoloz.ninua.26@gmail.com">
+            ✉ Email Me
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <span class="footer-hint" aria-live="polite" id="nav-hint">
+        ◄ ► arrow keys or click nav to explore
+      </span>
+      <span class="footer-credit">Built by <strong>XxNINUxX</strong> · Pixel style</span>
+    </footer>
+
+  </div><!-- /#screen -->
+
+  <!-- Hidden audio element — src added by JS only if file detected -->
+  <audio id="bg-audio" loop preload="none" aria-hidden="true"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

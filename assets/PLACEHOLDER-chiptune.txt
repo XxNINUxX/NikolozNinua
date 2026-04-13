@@ -1,0 +1,25 @@
+AUDIO ASSET PLACEHOLDER
+=======================
+
+To enable background chiptune music on the portfolio site:
+
+1. Obtain or create a royalty-free chiptune/8-bit loop in MP3 format.
+
+   Recommended free sources:
+   - https://opengameart.org  (search "chiptune loop")
+   - https://freemusicarchive.org  (search "8-bit" / "chiptune")
+   - Create your own in Beepbox: https://www.beepbox.co/
+
+2. Name the file exactly:
+       chiptune-loop.mp3
+
+3. Place it in this same directory:
+       assets/chiptune-loop.mp3
+
+4. Reload index.html — the audio controls (play/pause button + volume
+   slider) will appear automatically in the header once the file is
+   detected by the browser.  If the file is absent the audio UI is
+   hidden and no errors are shown.
+
+IMPORTANT: Make sure you have the rights to use any audio file you add.
+Do NOT commit copyrighted music without a proper licence.
