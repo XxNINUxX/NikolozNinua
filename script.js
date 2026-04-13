@@ -127,18 +127,6 @@
   });
 
   /* -----------------------------------------------------------------------
-   * Scanline toggle
-   * --------------------------------------------------------------------- */
-  var scanBtn = $("#toggle-scanlines");
-  if (scanBtn) {
-    scanBtn.addEventListener("click", function () {
-      document.body.classList.toggle("scanlines-on");
-      var on = document.body.classList.contains("scanlines-on");
-      scanBtn.setAttribute("aria-pressed", on ? "true" : "false");
-    });
-  }
-
-  /* -----------------------------------------------------------------------
    * Copy Email
    * --------------------------------------------------------------------- */
   var copyBtn = $("#copy-email");
